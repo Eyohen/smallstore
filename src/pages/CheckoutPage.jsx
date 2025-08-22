@@ -1,8 +1,3 @@
-
-
-
-
-
 // src/CheckoutPage.jsx - Updated to use the Enhanced Component
 
 import { useState, useRef, useEffect } from 'react';
@@ -54,9 +49,9 @@ function CheckoutPage() {
             try {
                 // Create PaymentAPI instance with correct credentials and URL
                 const paymentAPI = new PaymentAPI(
-                    'http://localhost:9000', // Correct blockchain API URL
-                    'fdb87b029d8fb531589df71e17a8cc55', // Your API key
-                    '5fe381f54803f100312117028542e952bd5d3d1d8b8df2dd1d0761c030cda4bf' // Your API secret
+                    'https://coinleyserver-production.up.railway.app', // Correct blockchain API URL
+                    'afb78ff958350b9067798dd077c28459', // Your API key
+                    'c22d3879eff18c2d3f8f8a61d4097c230a940356a3d139ffceee11ba65b1a34c' // Your API secret
                 );
 
                 // Use the PaymentAPI to fetch merchant wallets
@@ -342,9 +337,9 @@ function CheckoutPage() {
 
             {/* UPDATED: Enhanced Coinley Payment Component with Beautiful Design */}
             <EnhancedSimpleCoinleyPayment
-                apiKey="fdb87b029d8fb531589df71e17a8cc55"
-                apiSecret="5fe381f54803f100312117028542e952bd5d3d1d8b8df2dd1d0761c030cda4bf"
-                apiUrl="http://localhost:9000"
+                apiKey="afb78ff958350b9067798dd077c28459"
+                apiSecret="c22d3879eff18c2d3f8f8a61d4097c230a940356a3d139ffceee11ba65b1a34c"
+                apiUrl="https://coinleyserver-production.up.railway.app"
                 config={{
                     amount: total,
                     customerEmail: customerInfo.email,
