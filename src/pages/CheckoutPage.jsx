@@ -36,7 +36,7 @@ function CheckoutPage() {
 
     // Add state for merchant wallet configuration
     const [merchantWallets, setMerchantWallets] = useState({});
-    
+
     // NEW: State for the enhanced payment modal
     const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
 
@@ -70,7 +70,7 @@ function CheckoutPage() {
                     console.log('Merchant wallets loaded from backend:', walletMap);
                 } else {
                     setMerchantWallets({}); // Empty if no wallets configured
-                } 
+                }
             } catch (error) {
                 console.error('Failed to fetch merchant wallet config:', error);
                 setMerchantWallets({});// Empty on error
@@ -267,7 +267,7 @@ function CheckoutPage() {
 
                             {paymentStatus === 'success' && (
                                 <div className="mb-4 p-3 bg-green-50 text-green-700 rounded-md">
-                                    Payment successful! 
+                                    Payment successful!
                                 </div>
                             )}
 
@@ -337,8 +337,10 @@ function CheckoutPage() {
 
             {/* UPDATED: Enhanced Coinley Payment Component with Beautiful Design */}
             <EnhancedSimpleCoinleyPayment
-                apiKey="afb78ff958350b9067798dd077c28459"
-                apiSecret="c22d3879eff18c2d3f8f8a61d4097c230a940356a3d139ffceee11ba65b1a34c"
+                // apiKey="afb78ff958350b9067798dd077c28459" // for ecstasy staging
+                // apiSecret="c22d3879eff18c2d3f8f8a61d4097c230a940356a3d139ffceee11ba65b1a34c" // for ecstasy staging
+                apiKey="2ca225a6ee511ad51503efba135b769d"
+                apiSecret="c14351f7a16db90b84f2d78d8ea1a691d9c1314ea39cdf0baa29176626dbdf72"
                 apiUrl="https://coinleyserver-production.up.railway.app"
                 config={{
                     amount: total,
