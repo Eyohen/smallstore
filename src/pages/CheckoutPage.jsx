@@ -1,4 +1,4 @@
-// src/CheckoutPage.jsx - Updated to use the Enhanced Component
+// src/CheckoutPage.jsx - on the store
 
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
