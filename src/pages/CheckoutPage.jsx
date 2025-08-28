@@ -80,6 +80,7 @@ function CheckoutPage() {
         fetchMerchantConfig();
     }, []);
 
+    
     // Handle input change
     const handleInputChange = (e) => {
         const { name, value } = e.target;
