@@ -49,9 +49,9 @@ function CheckoutPage() {
             try {
                 // Create PaymentAPI instance with correct credentials and URL
                 const paymentAPI = new PaymentAPI(
-                    'http://localhost:9000', // Correct blockchain API URL
-                    'fdb87b029d8fb531589df71e17a8cc55', // Your API key
-                    '5fe381f54803f100312117028542e952bd5d3d1d8b8df2dd1d0761c030cda4bf' // Your API secret
+                    'https://talented-mercy-production.up.railway.app', // Correct blockchain API URL
+                    'afb78ff958350b9067798dd077c28459', // Your API key
+                    'c22d3879eff18c2d3f8f8a61d4097c230a940356a3d139ffceee11ba65b1a34c' // Your API secret
                 );
 
                 // Use the PaymentAPI to fetch merchant wallets
@@ -342,7 +342,7 @@ function CheckoutPage() {
                 // apiUrl="http://localhost:9000"
                 apiKey="afb78ff958350b9067798dd077c28459" // for ecstasy staging
                 apiSecret="c22d3879eff18c2d3f8f8a61d4097c230a940356a3d139ffceee11ba65b1a34c" // for ecstasy staging
-                apiUrl="https://talented-mercy-production.up.railway.app/"
+                apiUrl="https://talented-mercy-production.up.railway.app"
                 // apiKey="2ca225a6ee511ad51503efba135b769d"
                 // apiSecret="c14351f7a16db90b84f2d78d8ea1a691d9c1314ea39cdf0baa29176626dbdf72"
                 // apiUrl="https://coinleyserver-production.up.railway.app"
