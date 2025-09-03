@@ -366,6 +366,7 @@ function CheckoutPage() {
             theme="light"
         />
     )}
+    
 </CoinleyProvider>
         </div>
     );
