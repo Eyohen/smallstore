@@ -8,9 +8,14 @@ import { URL } from '../url';
 import { PackageSearch } from 'lucide-react';
 
 // UPDATED: Import the enhanced component with modern design
+// import {
+//     ThemeProvider,
+//     EnhancedSimpleCoinleyPayment,  // <- NEW: Enhanced component with beautiful design
+//     PaymentAPI,
+// } from 'coinley-test';
 import {
     ThemeProvider,
-    EnhancedSimpleCoinleyPayment,  // <- NEW: Enhanced component with beautiful design
+    CoinleyProvider,  // <- Use the provider instead
     PaymentAPI,
 } from 'coinley-test';
 import 'coinley-test/dist/style.css'
@@ -336,34 +341,32 @@ function CheckoutPage() {
                 </div>
             </div>
 
-            {/* UPDATED: Enhanced Coinley Payment Component with Beautiful Design */}
-            <EnhancedSimpleCoinleyPayment
-                // apiKey="fdb87b029d8fb531589df71e17a8cc55" // for ecstasy local
-                // apiSecret="5fe381f54803f100312117028542e952bd5d3d1d8b8df2dd1d0761c030cda4bf" // for ecstasy local
-                // apiUrl="http://localhost:9000"
-                apiKey="afb78ff958350b9067798dd077c28459" // for ecstasy staging
-                apiSecret="c22d3879eff18c2d3f8f8a61d4097c230a940356a3d139ffceee11ba65b1a34c" // for ecstasy staging
-                apiUrl="https://talented-mercy-production.up.railway.app"
-                // apiKey="2ca225a6ee511ad51503efba135b769d"
-                // apiSecret="c14351f7a16db90b84f2d78d8ea1a691d9c1314ea39cdf0baa29176626dbdf72"
-                // apiUrl="https://coinleyserver-production.up.railway.app"
-                config={{
-                    amount: total,
-                    customerEmail: customerInfo.email,
-                    merchantName: "Fresh food", // Add your store name here
-                    callbackUrl: `${window.location.origin}/api/webhooks/payments/coinley`,
-                    merchantWalletAddresses: merchantWallets,
-                    metadata: {
-                        orderId: currentOrderId,
-                        customerName: customerInfo.email
-                    }
-                }}
-                onSuccess={handlePaymentSuccess}
-                onError={handlePaymentError}
-                onClose={handleCloseModal}
-                isOpen={isPaymentModalOpen}
-                theme="light"
-            />
+        <CoinleyProvider
+    apiKey="afb78ff958350b9067798dd077c28459"
+    apiSecret="c22d3879eff18c2d3f8f8a61d4097c230a940356a3d139ffceee11ba65b1a34c"
+    apiUrl="https://talented-mercy-production.up.railway.app"
+>
+    {isPaymentModalOpen && (
+        <EnhancedSimpleCoinleyPayment
+            config={{
+                amount: total,
+                customerEmail: customerInfo.email,
+                merchantName: "Fresh food",
+                callbackUrl: `${window.location.origin}/api/webhooks/payments/coinley`,
+                merchantWalletAddresses: merchantWallets,
+                metadata: {
+                    orderId: currentOrderId,
+                    customerName: customerInfo.email
+                }
+            }}
+            onSuccess={handlePaymentSuccess}
+            onError={handlePaymentError}
+            onClose={handleCloseModal}
+            isOpen={isPaymentModalOpen}
+            theme="light"
+        />
+    )}
+</CoinleyProvider>
         </div>
     );
 }
