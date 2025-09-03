@@ -15,7 +15,8 @@ import { PackageSearch } from 'lucide-react';
 // } from 'coinley-test';
 import {
     ThemeProvider,
-    CoinleyProvider,  // <- Use the provider instead
+    // CoinleyProvider,  // <- Use the provider instead
+    EnhancedSimpleCoinleyPayment, 
     PaymentAPI,
 } from 'coinley-test';
 import 'coinley-test/dist/style.css'
@@ -366,7 +367,7 @@ function CheckoutPage() {
             theme="light"
         />
     )}
-    
+
 </CoinleyProvider>
         </div>
     );
