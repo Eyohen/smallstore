@@ -340,9 +340,11 @@ function CheckoutPage() {
                 // apiKey="fdb87b029d8fb531589df71e17a8cc55" // for ecstasy local
                 // apiSecret="5fe381f54803f100312117028542e952bd5d3d1d8b8df2dd1d0761c030cda4bf" // for ecstasy local
                 // apiUrl="http://localhost:9000"
-                apiKey="afb78ff958350b9067798dd077c28459" // for ecstasy staging
-                apiSecret="c22d3879eff18c2d3f8f8a61d4097c230a940356a3d139ffceee11ba65b1a34c" // for ecstasy staging
+                // apiKey="afb78ff958350b9067798dd077c28459" // for ecstasy staging
+                // apiSecret="c22d3879eff18c2d3f8f8a61d4097c230a940356a3d139ffceee11ba65b1a34c" // for ecstasy staging
+                publicKey="pk_95eb0b7a2fc51bc343527ecc61a90617" // for ecstasy staging
                 apiUrl="https://talented-mercy-production.up.railway.app"
+                
                 // apiKey="8dedf76b2d0e6528ee9f1ff2a65d3d6b" // henry staging
                 // apiSecret="a91c93bcb2c8c3924d2f91bed35548a353e572d84fec921b70b9eee7bf782de5" // for henry staging
                 // apiUrl="https://talented-mercy-production.up.railway.app"
