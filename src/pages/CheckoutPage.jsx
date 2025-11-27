@@ -42,16 +42,16 @@ function CheckoutPage() {
     // Calculate order totals - total is now just the subtotal (no shipping)
     const total = subtotal;
 
+    // Merchant public key for API authentication
+    const MERCHANT_PUBLIC_KEY = 'pk_95eb0b7a2fc51bc343527ecc61a90617';
+    const API_URL = 'https://talented-mercy-production.up.railway.app';
+
     // Fetch merchant wallet configuration on component mount
     useEffect(() => {
         const fetchMerchantConfig = async () => {
             try {
-                // Create PaymentAPI instance with correct credentials and URL
-                const paymentAPI = new PaymentAPI(
-                    'https://talented-mercy-production.up.railway.app', // Correct blockchain API URL
-                    'afb78ff958350b9067798dd077c28459', // Your API key
-                    'c22d3879eff18c2d3f8f8a61d4097c230a940356a3d139ffceee11ba65b1a34c' // Your API secret
-                );
+                // Create PaymentAPI instance with public key (no secret needed)
+                const paymentAPI = new PaymentAPI(API_URL, MERCHANT_PUBLIC_KEY);
 
                 // Use the PaymentAPI to fetch merchant wallets
                 const walletsResponse = await paymentAPI.api.get('/api/merchants/wallets');
@@ -167,7 +167,7 @@ function CheckoutPage() {
             // Clear the cart
             clearCart();
 
-            // Store success data
+            // Store success data with all available payment information
             setSuccessData({
                 orderId,
                 total,
@@ -175,7 +175,10 @@ function CheckoutPage() {
                     transactionId: transactionHash,
                     paymentId,
                     network: paymentDetails?.network,
-                    currency: paymentDetails?.currency
+                    currency: paymentDetails?.currency,
+                    amount: paymentDetails?.amount || total,
+                    senderAddress: paymentDetails?.senderAddress,
+                    timestamp: new Date().toISOString()
                 }
             });
 
@@ -337,20 +340,8 @@ function CheckoutPage() {
 
             {/* UPDATED: Enhanced Coinley Payment Component with Beautiful Design */}
             <EnhancedSimpleCoinleyPayment
-                // apiKey="fdb87b029d8fb531589df71e17a8cc55" // for ecstasy local
-                // apiSecret="5fe381f54803f100312117028542e952bd5d3d1d8b8df2dd1d0761c030cda4bf" // for ecstasy local
-                // apiUrl="http://localhost:9000"
-                // apiKey="afb78ff958350b9067798dd077c28459" // for ecstasy staging
-                // apiSecret="c22d3879eff18c2d3f8f8a61d4097c230a940356a3d139ffceee11ba65b1a34c" // for ecstasy staging
-                publicKey="pk_95eb0b7a2fc51bc343527ecc61a90617" // for ecstasy staging
-                apiUrl="https://talented-mercy-production.up.railway.app"
-                
-                // apiKey="8dedf76b2d0e6528ee9f1ff2a65d3d6b" // henry staging
-                // apiSecret="a91c93bcb2c8c3924d2f91bed35548a353e572d84fec921b70b9eee7bf782de5" // for henry staging
-                // apiUrl="https://talented-mercy-production.up.railway.app"
-                // apiKey="2ca225a6ee511ad51503efba135b769d"
-                // apiSecret="c14351f7a16db90b84f2d78d8ea1a691d9c1314ea39cdf0baa29176626dbdf72"
-                // apiUrl="https://coinleyserver-production.up.railway.app"
+                publicKey={MERCHANT_PUBLIC_KEY}
+                apiUrl={API_URL}
                 config={{
                     amount: total,
                     customerEmail: customerInfo.email,
