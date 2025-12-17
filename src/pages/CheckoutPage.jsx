@@ -45,11 +45,12 @@ function CheckoutPage() {
     // Merchant public key for API authentication
     // const MERCHANT_PUBLIC_KEY = 'pk_95eb0b7a2fc51bc343527ecc61a90617';
     const MERCHANT_PUBLIC_KEY = 'pk_55b618684a25669f942bd4b21a4d61c4';
-    
+
     const API_URL = 'https://talented-mercy-production.up.railway.app';
 
     // Fetch merchant wallet configuration on component mount
     useEffect(() => {
+        
         const fetchMerchantConfig = async () => {
             try {
                 // Create PaymentAPI instance with public key (no secret needed)
