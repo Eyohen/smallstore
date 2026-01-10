@@ -6,13 +6,25 @@ import axios from 'axios';
 import { URL } from '../url';
 import { PackageSearch } from 'lucide-react';
 
-// UPDATED: Import the enhanced component with modern design
+// ============================================================
+// COINLEY-PAY (Production SDK) - Currently Active
+// ============================================================
 import {
     ThemeProvider,
-    EnhancedSimpleCoinleyPayment,  // <- NEW: Enhanced component with beautiful design
+    EnhancedSimpleCoinleyPayment,
     PaymentAPI,
-} from 'coinley-test';
-import 'coinley-test/dist/style.css'
+} from 'coinley-pay';
+import 'coinley-pay/dist/style.css'
+
+// ============================================================
+// COINLEY-TEST (Staging SDK) - Commented Out
+// ============================================================
+// import {
+//     ThemeProvider,
+//     EnhancedSimpleCoinleyPayment,  // <- Enhanced component with beautiful design
+//     PaymentAPI,
+// } from 'coinley-test';
+// import 'coinley-test/dist/style.css'
 
 function CheckoutPage() {
     const navigate = useNavigate();
