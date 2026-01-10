@@ -8,10 +8,11 @@ import { PackageSearch } from 'lucide-react';
 
 // ============================================================
 // COINLEY-PAY (Production SDK) - Currently Active
+// Using RedesignedCoinleyPayment (new UI with sidebar tabs, grid selection)
 // ============================================================
 import {
     ThemeProvider,
-    EnhancedSimpleCoinleyPayment,
+    RedesignedCoinleyPayment,  // <- NEW: Redesigned component with sidebar tabs
     PaymentAPI,
 } from 'coinley-pay';
 import 'coinley-pay/dist/style.css'
@@ -21,7 +22,7 @@ import 'coinley-pay/dist/style.css'
 // ============================================================
 // import {
 //     ThemeProvider,
-//     EnhancedSimpleCoinleyPayment,  // <- Enhanced component with beautiful design
+//     EnhancedSimpleCoinleyPayment,  // <- Old enhanced component
 //     PaymentAPI,
 // } from 'coinley-test';
 // import 'coinley-test/dist/style.css'
@@ -353,8 +354,8 @@ function CheckoutPage() {
                 </div>
             </div>
 
-            {/* UPDATED: Enhanced Coinley Payment Component with Beautiful Design */}
-            <EnhancedSimpleCoinleyPayment
+            {/* REDESIGNED: Coinley Payment Component with Sidebar Tabs & Grid Selection */}
+            <RedesignedCoinleyPayment
                 publicKey={MERCHANT_PUBLIC_KEY}
                 apiUrl={API_URL}
                 config={{
