@@ -14,7 +14,7 @@
     "axios": "^1.7.7",
     "buffer": "^6.0.3",
     "coinley-checkout": "^0.8.9",
-    "coinley-pay": "^0.0.7",
+    "coinley-pay": "^0.0.8",
     "coinley-sdk": "^0.1.8",
     "coinley-test": "^0.64.106",
     "dotenv": "^16.4.5",
