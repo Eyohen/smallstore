@@ -355,14 +355,18 @@ function CheckoutPage() {
             </div>
 
             {/* REDESIGNED: Coinley Payment Component with Sidebar Tabs & Grid Selection */}
+            {/*
+                Note: Webhooks are configured in the Coinley merchant dashboard, not here.
+                The onSuccess/onError callbacks below are for frontend UI updates only.
+                Always verify payment status via webhooks before fulfilling orders.
+            */}
             <RedesignedCoinleyPayment
                 publicKey={MERCHANT_PUBLIC_KEY}
                 apiUrl={API_URL}
                 config={{
                     amount: total,
                     customerEmail: customerInfo.email,
-                    merchantName: "Fresh food", // Add your store name here
-                    callbackUrl: `${window.location.origin}/api/webhooks/payments/coinley`,
+                    merchantName: "Fresh food",
                     merchantWalletAddresses: merchantWallets,
                     metadata: {
                         orderId: currentOrderId,
