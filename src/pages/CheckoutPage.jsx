@@ -63,7 +63,7 @@
 //     const MERCHANT_PUBLIC_KEY = 'pk_95eb0b7a2fc51bc343527ecc61a90617';
 //     // const MERCHANT_PUBLIC_KEY = 'pk_55b618684a25669f942bd4b21a4d61c4';
 
-//     const API_URL = 'https://hub.coinley.io';
+//     const API_URL = 'https://talented-mercy-production.up.railway.app';
 
 //     // Fetch merchant wallet configuration on component mount
 //     useEffect(() => {
@@ -446,7 +446,7 @@ function CheckoutPage() {
 
     // Merchant configuration
     const MERCHANT_PUBLIC_KEY = 'pk_95eb0b7a2fc51bc343527ecc61a90617';
-    const API_URL = 'https://hub.coinley.io';
+    const API_URL = 'https://talented-mercy-production.up.railway.app';
 
     // ⚠️ IMPORTANT: Replace with your CoinMarketCap API key
     // Get your API key at: https://coinmarketcap.com/api/
