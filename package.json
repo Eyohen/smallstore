@@ -16,7 +16,7 @@
     "coinley-checkout": "^0.8.9",
     "coinley-pay": "^0.0.32",
     "coinley-sdk": "^0.1.8",
-    "coinley-test": "^0.65.109",
+    "coinley-test": "^0.65.110",
     "dotenv": "^16.4.5",
     "framer-motion": "^11.11.8",
     "lodash": "^4.17.21",
