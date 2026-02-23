@@ -445,7 +445,9 @@ function CheckoutPage() {
     const totalNGN = subtotal;
 
     // Merchant configuration
-    const MERCHANT_PUBLIC_KEY = 'pk_95eb0b7a2fc51bc343527ecc61a90617';
+    // const MERCHANT_PUBLIC_KEY = 'pk_95eb0b7a2fc51bc343527ecc61a90617';
+      const MERCHANT_PUBLIC_KEY = 'pk_7afacf14545fe11927df8aa43ab62816';
+  
     const API_URL = 'https://talented-mercy-production.up.railway.app';
 
     // ⚠️ IMPORTANT: Replace with your CoinMarketCap API key
