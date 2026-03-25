@@ -7,25 +7,12 @@ import axios from 'axios';
 import { URL } from '../url';
 import { PackageSearch } from 'lucide-react';
 
-// ============================================================
-// COINLEY-PAY (Production SDK) - Commented Out
-// ============================================================
-// import {
-//     ThemeProvider,
-//     RedesignedCoinleyPayment,
-//     PaymentAPI,
-// } from 'coinley-pay';
-// import 'coinley-pay/dist/style.css'
-
-// ============================================================
-// COINLEY-TEST (Staging SDK) - Currently Active
-// ============================================================
 import {
     ThemeProvider,
-    EnhancedSimpleCoinleyPayment,
+    RedesignedCoinleyPayment,
     PaymentAPI,
-} from 'coinley-test';
-import 'coinley-test/dist/style.css'
+} from 'coinley-pay';
+import 'coinley-pay/dist/style.css'
 
 function CheckoutPage() {
     const navigate = useNavigate();
@@ -157,9 +144,9 @@ function CheckoutPage() {
     };
 
     // Handle successful payment - Same logic as before
-    const handlePaymentSuccess = async (paymentId, transactionHash, paymentDetails) => {
+    const handlePaymentSuccess = async ({ paymentId, transactionHash, senderAddress, network, currency, paymentDetails, depositAddress }) => {
         try {
-            console.log('Payment success:', { paymentId, transactionHash, paymentDetails });
+            console.log('Payment success:', { paymentId, transactionHash, senderAddress, network, currency, paymentDetails, depositAddress });
             setPaymentStatus('success');
 
             const orderId = currentOrderId || localStorage.getItem('currentOrderId');
@@ -174,8 +161,8 @@ function CheckoutPage() {
                     paymentId,
                     status: 'success',
                     transactionId: transactionHash,
-                    network: paymentDetails?.network,
-                    currency: paymentDetails?.currency,
+                    network: network || paymentDetails?.network,
+                    currency: currency || paymentDetails?.currency,
                     amount: paymentDetails?.amount || total,
                     timestamp: new Date().toISOString()
                 }
@@ -191,10 +178,10 @@ function CheckoutPage() {
                 paymentDetails: {
                     transactionId: transactionHash,
                     paymentId,
-                    network: paymentDetails?.network,
-                    currency: paymentDetails?.currency,
+                    network: network || paymentDetails?.network,
+                    currency: currency || paymentDetails?.currency,
                     amount: paymentDetails?.amount || total,
-                    senderAddress: paymentDetails?.senderAddress,
+                    senderAddress: senderAddress || paymentDetails?.senderAddress,
                     timestamp: new Date().toISOString()
                 }
             });
@@ -355,31 +342,7 @@ function CheckoutPage() {
                 </div>
             </div>
 
-            {/* COINLEY-PAY (Production) - Commented Out */}
-            {/*
             <RedesignedCoinleyPayment
-                publicKey={MERCHANT_PUBLIC_KEY}
-                apiUrl={API_URL}
-                config={{
-                    amount: total,
-                    customerEmail: customerInfo.email,
-                    merchantName: "Fresh food",
-                    merchantWalletAddresses: merchantWallets,
-                    metadata: {
-                        orderId: currentOrderId,
-                        customerName: customerInfo.email
-                    }
-                }}
-                onSuccess={handlePaymentSuccess}
-                onError={handlePaymentError}
-                onClose={handleCloseModal}
-                isOpen={isPaymentModalOpen}
-                theme="light"
-            />
-            */}
-
-            {/* COINLEY-TEST (Staging SDK) - Currently Active */}
-            <EnhancedSimpleCoinleyPayment
                 publicKey={MERCHANT_PUBLIC_KEY}
                 apiUrl={API_URL}
                 config={{
