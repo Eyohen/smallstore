@@ -9,7 +9,7 @@ import { PackageSearch } from 'lucide-react';
 
 import {
     ThemeProvider,
-    RedesignedCoinleyPayment,
+    CoinleyPayment,
     PaymentAPI,
 } from 'coinley-pay';
 import 'coinley-pay/dist/style.css'
@@ -342,7 +342,7 @@ function CheckoutPage() {
                 </div>
             </div>
 
-            <RedesignedCoinleyPayment
+            <CoinleyPayment
                 publicKey={MERCHANT_PUBLIC_KEY}
                 apiUrl={API_URL}
                 config={{
