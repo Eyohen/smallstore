@@ -6,6 +6,55 @@
 
 body {
   font-family: 'Open Sans', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  margin: 0;
+  overflow-x: hidden;
+  overscroll-behavior-y: none;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+#root,
+.smallstore-app {
+  min-height: 100svh;
+}
+
+@supports (min-height: 100dvh) {
+  #root,
+  .smallstore-app {
+    min-height: 100dvh;
+  }
+}
+
+.smallstore-checkout-page {
+  min-height: 100svh;
+  overflow-anchor: none;
+  contain: layout paint;
+}
+
+@supports (min-height: 100dvh) {
+  .smallstore-checkout-page {
+    min-height: 100dvh;
+  }
+}
+
+html.coinley-sdk-open,
+body.coinley-sdk-open {
+  overscroll-behavior: none;
+}
+
+body.coinley-sdk-open #root {
+  height: 100svh;
+  overflow: hidden;
+}
+
+@supports (height: 100dvh) {
+  body.coinley-sdk-open #root {
+    height: 100dvh;
+  }
 }
 
 .scrollbar-hide::-webkit-scrollbar {

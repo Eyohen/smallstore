@@ -9,11 +9,10 @@ import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
 import OrderSuccessPage from './pages/OrderSuccessPage';
 import NotFoundPage from './pages/NotFoundPage';
-import 'coinley-checkout/dist/style.css';
 
 function App() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="smallstore-app flex flex-col min-h-screen">
       <Navbar />
       <main className="flex-grow">
         <Routes>

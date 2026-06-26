@@ -39,6 +39,19 @@ function CheckoutPage() {
     // NEW: State for the enhanced payment modal
     const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
 
+    useEffect(() => {
+        const root = document.documentElement;
+        const body = document.body;
+
+        root.classList.toggle('coinley-sdk-open', isPaymentModalOpen);
+        body.classList.toggle('coinley-sdk-open', isPaymentModalOpen);
+
+        return () => {
+            root.classList.remove('coinley-sdk-open');
+            body.classList.remove('coinley-sdk-open');
+        };
+    }, [isPaymentModalOpen]);
+
     // Calculate order totals - total is now just the subtotal (no shipping)
     const total = subtotal;
 
@@ -215,7 +228,7 @@ function CheckoutPage() {
     };
 
     return (
-        <div className="container mx-auto py-8 px-4">
+        <div className="smallstore-checkout-page container mx-auto px-4 py-6 sm:py-8">
             <h1 className="text-3xl font-bold mb-8 text-center">Checkout</h1>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -301,7 +314,7 @@ function CheckoutPage() {
 
                 {/* Order Summary - Same as before */}
                 <div>
-                    <div className="bg-white rounded-lg shadow-md p-6 sticky top-6">
+                    <div className="bg-white rounded-lg shadow-md p-6 lg:sticky lg:top-6">
                         <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
 
                         <div className="max-h-80 overflow-y-auto mb-4">
