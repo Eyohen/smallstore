@@ -11,8 +11,8 @@ import {
     ThemeProvider,
     CoinleyPayment,
     PaymentAPI,
-} from 'coinley-pay';
-import 'coinley-pay/dist/style.css'
+} from 'stablezact-pay';
+import 'stablezact-pay/dist/style.css'
 
 function CheckoutPage() {
     const navigate = useNavigate();
