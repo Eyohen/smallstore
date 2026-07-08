@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
-import coinleystore from '../assets/coinley-store.svg';
+import coinleystore from '../assets/Black.png';
 import { GoPerson } from "react-icons/go";
 import { FiShoppingCart } from "react-icons/fi";
 
@@ -22,6 +22,7 @@ function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <span className="text-primary text-2xl font-bold"><img src={coinleystore} className='w-48'/></span>
+             <p className='text-3xl pt-1 font-bold'>Store</p>
           </Link>
 
           {/* Desktop Navigation */}

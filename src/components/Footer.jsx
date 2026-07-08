@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import coinleystore from '../assets/coinley-store-dark.svg';
+import coinleystore from '../assets/White.png';
 
 
 function Footer() {
@@ -47,7 +47,7 @@ function Footer() {
 
         {/* Copyright */}
         <div className="border-t border-gray-700 mt-8 pt-4 text-center text-gray-300">
-          <p>&copy; {currentYear} Coinley Store. All rights reserved.</p>
+          <p>&copy; {currentYear} Stablezact Store. All rights reserved.</p>
         </div>
       </div>
     </footer>
