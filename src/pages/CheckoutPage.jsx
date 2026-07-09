@@ -7,11 +7,12 @@ import axios from 'axios';
 import { URL } from '../url';
 import { PackageSearch } from 'lucide-react';
 
-import {
-    ThemeProvider,
-    CoinleyPayment,
-    PaymentAPI,
-} from 'stablezact-pay';
+// import {
+//     ThemeProvider,
+//     CoinleyPayment,
+//     PaymentAPI,
+// } from 'stablezact-pay';
+ import { StablezactPayment, PaymentAPI } from 'stablezact-pay';
 import 'stablezact-pay/dist/style.css'
 
 function CheckoutPage() {
