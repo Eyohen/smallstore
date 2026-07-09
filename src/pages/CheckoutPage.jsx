@@ -12,7 +12,7 @@ import { PackageSearch } from 'lucide-react';
 //     CoinleyPayment,
 //     PaymentAPI,
 // } from 'stablezact-pay';
- import { StablezactPayment, PaymentAPI } from 'stablezact-pay';
+import { StablezactPayment, PaymentAPI } from 'stablezact-pay';
 import 'stablezact-pay/dist/style.css'
 
 function CheckoutPage() {
