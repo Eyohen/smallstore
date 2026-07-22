@@ -356,7 +356,7 @@ function CheckoutPage() {
                 </div>
             </div>
 
-            <CoinleyPayment
+            <StablezactPayment
                 publicKey={MERCHANT_PUBLIC_KEY}
                 apiUrl={API_URL}
                 config={{
