@@ -58,8 +58,8 @@ function CheckoutPage() {
 
     // Merchant public key for API authentication
     // const MERCHANT_PUBLIC_KEY = 'pk_95eb0b7a2fc51bc343527ecc61a90617';
-    // const MERCHANT_PUBLIC_KEY = 'pk_55b618684a25669f942bd4b21a4d61c4';
-     const MERCHANT_PUBLIC_KEY = 'pk_test_aa6f5b1acb0f1bd79ef044253afebe00'; // test public key
+    const MERCHANT_PUBLIC_KEY = 'pk_55b618684a25669f942bd4b21a4d61c4';
+    //  const MERCHANT_PUBLIC_KEY = 'pk_test_aa6f5b1acb0f1bd79ef044253afebe00'; // test public key
 
 
     const API_URL = 'https://talented-mercy-production.up.railway.app';
