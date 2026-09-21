@@ -27,7 +27,7 @@
     "react-paystack": "^6.0.0",
     "react-router-dom": "^6.26.2",
     "recharts": "^2.13.0",
-    "stablezact-pay": "^0.73.11",
+    "stablezact-pay": "^0.73.12",
     "web3": "^4.16.0"
   },
   "devDependencies": {
