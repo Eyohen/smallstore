@@ -17,7 +17,6 @@ import 'stablezact-pay/dist/style.css'
 
 const MERCHANT_PUBLIC_KEY = import.meta.env.VITE_STABLEZACT_PUBLIC_KEY;
 const STABLEZACT_API_URL = import.meta.env.VITE_STABLEZACT_API_URL;
-const STABLEZACT_WEBHOOK_URL = import.meta.env.VITE_STABLEZACT_WEBHOOK_URL;
 
 function CheckoutPage() {
     const navigate = useNavigate();
@@ -40,6 +39,7 @@ function CheckoutPage() {
 
     // NEW: State for the enhanced payment modal
     const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+    const [checkoutReference, setCheckoutReference] = useState(null);
 
     useEffect(() => {
         const root = document.documentElement;
@@ -79,7 +79,7 @@ function CheckoutPage() {
                 throw new Error('Please enter your email address');
             }
 
-            if (!MERCHANT_PUBLIC_KEY || !STABLEZACT_API_URL || !STABLEZACT_WEBHOOK_URL) {
+            if (!MERCHANT_PUBLIC_KEY || !STABLEZACT_API_URL) {
                 throw new Error('Checkout is temporarily unavailable because its staging configuration is incomplete.');
             }
 
@@ -116,6 +116,11 @@ function CheckoutPage() {
 
             // UPDATED: Open the enhanced payment modal
             if (paymentMethod === 'coinley') {
+                const checkoutResponse = await axios.post(`${URL}/api/orders/${orderId}/checkout-reference`);
+                if (!checkoutResponse.data?.reference) {
+                    throw new Error('The payment checkout could not be initialized.');
+                }
+                setCheckoutReference(checkoutResponse.data.reference);
                 setIsPaymentModalOpen(true);
             } else {
                 setProcessing(false);
@@ -190,6 +195,7 @@ function CheckoutPage() {
     const handleCloseModal = () => {
         console.log('Payment modal closed');
         setIsPaymentModalOpen(false);
+        setCheckoutReference(null);
         setProcessing(false);
 
         // Navigate to success page if payment was successful
@@ -326,19 +332,10 @@ function CheckoutPage() {
                 </div>
             </div>
 
-            {MERCHANT_PUBLIC_KEY && STABLEZACT_API_URL && STABLEZACT_WEBHOOK_URL && <StablezactPayment
+            {MERCHANT_PUBLIC_KEY && STABLEZACT_API_URL && checkoutReference && <StablezactPayment
                 publicKey={MERCHANT_PUBLIC_KEY}
                 apiUrl={STABLEZACT_API_URL}
-                config={{
-                    amount: total,
-                    customerEmail: customerInfo.email,
-                    merchantName: "Fresh food",
-                    callbackUrl: STABLEZACT_WEBHOOK_URL,
-                    metadata: {
-                        orderId: currentOrderId,
-                        customerName: customerInfo.email
-                    }
-                }}
+                reference={checkoutReference}
                 onSuccess={handlePaymentSuccess}
                 onError={handlePaymentError}
                 onClose={handleCloseModal}
