@@ -1,6 +1,6 @@
 // src/CheckoutPage.jsx - on the store
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import axios from 'axios';
@@ -12,8 +12,12 @@ import { PackageSearch } from 'lucide-react';
 //     CoinleyPayment,
 //     PaymentAPI,
 // } from 'stablezact-pay';
-import { StablezactPayment, PaymentAPI } from 'stablezact-pay';
+import { StablezactPayment } from 'stablezact-pay';
 import 'stablezact-pay/dist/style.css'
+
+const MERCHANT_PUBLIC_KEY = import.meta.env.VITE_STABLEZACT_PUBLIC_KEY;
+const STABLEZACT_API_URL = import.meta.env.VITE_STABLEZACT_API_URL;
+const STABLEZACT_WEBHOOK_URL = import.meta.env.VITE_STABLEZACT_WEBHOOK_URL;
 
 function CheckoutPage() {
     const navigate = useNavigate();
@@ -33,9 +37,6 @@ function CheckoutPage() {
 
     // Add state to store payment success data
     const [successData, setSuccessData] = useState(null);
-
-    // Add state for merchant wallet configuration
-    const [merchantWallets, setMerchantWallets] = useState({});
 
     // NEW: State for the enhanced payment modal
     const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
@@ -57,49 +58,6 @@ function CheckoutPage() {
     const total = subtotal;
 
     
-    // Merchant public key for API authentication
-    // const MERCHANT_PUBLIC_KEY = 'pk_95eb0b7a2fc51bc343527ecc61a90617';
-    const MERCHANT_PUBLIC_KEY = 'pk_live_5d70b92a72c1b522aeebceb5e46a1ad616122adf2b34e98827844448ffdf6e00';
-    //  const MERCHANT_PUBLIC_KEY = 'pk_test_aa6f5b1acb0f1bd79ef044253afebe00'; // test public key
-
-
-    const API_URL = 'https://talented-mercy-production.up.railway.app';
-
-    // Fetch merchant wallet configuration on component mount
-    useEffect(() => {
-
-        const fetchMerchantConfig = async () => {
-            try {
-                // Create PaymentAPI instance with public key (no secret needed)
-                const paymentAPI = new PaymentAPI(API_URL, MERCHANT_PUBLIC_KEY);
-
-                // Use the PaymentAPI to fetch merchant wallets
-                const walletsResponse = await paymentAPI.api.get('/api/merchants/wallets');
-
-                if (walletsResponse.data && walletsResponse.data.wallets) {
-                    // Transform the wallet data from backend format to simple key-value pairs
-                    const walletMap = {};
-                    walletsResponse.data.wallets.forEach(wallet => {
-                        if (wallet.walletAddress && wallet.walletAddress.trim() !== '') {
-                            walletMap[wallet.networkShortName] = wallet.walletAddress;
-                        }
-                    });
-
-                    setMerchantWallets(walletMap);
-                    console.log('Merchant wallets loaded from backend:', walletMap);
-                } else {
-                    setMerchantWallets({}); // Empty if no wallets configured
-                }
-            } catch (error) {
-                console.error('Failed to fetch merchant wallet config:', error);
-                setMerchantWallets({});// Empty on error
-            }
-        };
-
-        fetchMerchantConfig();
-    }, []);
-
-
     // Handle input change
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -121,9 +79,20 @@ function CheckoutPage() {
                 throw new Error('Please enter your email address');
             }
 
-            // Validate email format
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(customerInfo.email)) {
+            if (!MERCHANT_PUBLIC_KEY || !STABLEZACT_API_URL || !STABLEZACT_WEBHOOK_URL) {
+                throw new Error('Checkout is temporarily unavailable because its staging configuration is incomplete.');
+            }
+
+            const email = customerInfo.email.trim();
+            const atIndex = email.indexOf('@');
+            const dotIndex = email.lastIndexOf('.');
+            const validEmail = email.length <= 254
+                && atIndex > 0
+                && atIndex === email.lastIndexOf('@')
+                && dotIndex > atIndex + 1
+                && dotIndex < email.length - 1
+                && !email.includes(' ');
+            if (!validEmail) {
                 throw new Error('Please enter a valid email address');
             }
 
@@ -135,8 +104,7 @@ function CheckoutPage() {
                     subtotal,
                     total
                 },
-                paymentMethod,
-                merchantWallets: merchantWallets // Include wallet addresses in order
+                paymentMethod
             };
 
             // Create order in your system
@@ -358,14 +326,14 @@ function CheckoutPage() {
                 </div>
             </div>
 
-            <StablezactPayment
+            {MERCHANT_PUBLIC_KEY && STABLEZACT_API_URL && STABLEZACT_WEBHOOK_URL && <StablezactPayment
                 publicKey={MERCHANT_PUBLIC_KEY}
-                apiUrl={API_URL}
+                apiUrl={STABLEZACT_API_URL}
                 config={{
                     amount: total,
                     customerEmail: customerInfo.email,
                     merchantName: "Fresh food",
-                    merchantWalletAddresses: merchantWallets,
+                    callbackUrl: STABLEZACT_WEBHOOK_URL,
                     metadata: {
                         orderId: currentOrderId,
                         customerName: customerInfo.email
@@ -376,7 +344,7 @@ function CheckoutPage() {
                 onClose={handleCloseModal}
                 isOpen={isPaymentModalOpen}
                 theme="light"
-            />
+            />}
         </div>
     );
 }
