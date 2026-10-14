@@ -3,7 +3,7 @@ import { useLocation, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 // Coinley API URL for fetching payment details
-const COINLEY_API_URL = 'https://talented-mercy-production.up.railway.app';
+const COINLEY_API_URL = import.meta.env.VITE_STABLEZACT_API_URL;
 
 // Network icons/colors mapping
 const networkConfig = {
