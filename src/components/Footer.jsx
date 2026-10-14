@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import coinleystore from '../assets/White.png';
+import stablezactstore from '../assets/White.png';
 
 
 function Footer() {
@@ -11,7 +11,7 @@ function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* About */}
           <div>
-            <h3 className="text-lg font-bold mb-4"><img src={coinleystore} className='w-48'/></h3>
+            <h3 className="text-lg font-bold mb-4"><img src={stablezactstore} className='w-48'/></h3>
             <p className="text-gray-300">
               We provide the freshest fruits and vegetables from local farmers to your table.
             </p>
