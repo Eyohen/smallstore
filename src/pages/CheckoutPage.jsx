@@ -17,6 +17,7 @@ import { StablezactPayment } from 'stablezact-pay';
 import 'stablezact-pay/dist/style.css'
 
 const MERCHANT_PUBLIC_KEY = import.meta.env.VITE_STABLEZACT_PUBLIC_KEY;
+
 const STABLEZACT_API_URL = import.meta.env.VITE_STABLEZACT_API_URL;
 
 function CheckoutPage() {
