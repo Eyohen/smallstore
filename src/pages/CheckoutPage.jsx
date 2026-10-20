@@ -42,6 +42,7 @@ function CheckoutPage() {
     // NEW: State for the enhanced payment modal
     const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
     const [checkoutReference, setCheckoutReference] = useState(null);
+    const [checkoutApiUrl, setCheckoutApiUrl] = useState(null);
 
     useEffect(() => {
         const root = document.documentElement;
@@ -118,11 +119,14 @@ function CheckoutPage() {
 
             // UPDATED: Open the enhanced payment modal
             if (paymentMethod === 'coinley') {
-                const checkoutResponse = await axios.post(`${URL}/api/orders/${orderId}/checkout-reference`);
-                if (!checkoutResponse.data?.reference) {
+                const checkoutResponse = await axios.post(`${URL}/api/orders/${orderId}/checkout-reference`, {
+                    storefront: 'smallstore'
+                });
+                if (!checkoutResponse.data?.reference || !checkoutResponse.data?.checkoutApiUrl) {
                     throw new Error('The payment checkout could not be initialized.');
                 }
                 setCheckoutReference(checkoutResponse.data.reference);
+                setCheckoutApiUrl(checkoutResponse.data.checkoutApiUrl);
                 setIsPaymentModalOpen(true);
             } else {
                 setProcessing(false);
@@ -198,6 +202,7 @@ function CheckoutPage() {
         console.log('Payment modal closed');
         setIsPaymentModalOpen(false);
         setCheckoutReference(null);
+        setCheckoutApiUrl(null);
         setProcessing(false);
 
         // Navigate to success page if payment was successful
@@ -334,9 +339,9 @@ function CheckoutPage() {
                 </div>
             </div>
 
-            {MERCHANT_PUBLIC_KEY && STABLEZACT_API_URL && checkoutReference && <StablezactPayment
+            {MERCHANT_PUBLIC_KEY && checkoutApiUrl && checkoutReference && <StablezactPayment
                 publicKey={MERCHANT_PUBLIC_KEY}
-                apiUrl={STABLEZACT_API_URL}
+                apiUrl={checkoutApiUrl}
                 reference={checkoutReference}
                 onSuccess={handlePaymentSuccess}
                 onError={handlePaymentError}
